@@ -1,0 +1,30 @@
+$def with (league, locations, players)
+
+<h3>Start Game</h3>
+
+<p><a href="/league/">Back to league</a></p>
+
+<form method="post">
+
+<h4>Choose a location</h4>
+<ul>
+$for location in locations:
+    <li>
+        <input type="radio" id="locationId_$location.id" name="locationId" value="$location.id" />
+        <label for="locationId_$location.id">$location.name</label>
+    </li>
+</ul>
+
+<h4>Choose players</h4>
+<ul>
+$for player in players:
+    <li>
+        <input type="checkbox" name="playerId_$player.id" id="playerId_$player.id" value="$player.id" />
+        <label for="playerId_$player.id">$player.name</label>
+    </li>
+</ul>
+
+<input type="submit" value="Start Game" />
+
+</form>
+
