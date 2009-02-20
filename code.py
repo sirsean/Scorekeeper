@@ -1,8 +1,14 @@
 import web
 import re
 from BasicDao import LeagueDao, PlayerDao, LocationDao, GameDao
+import settings
 
-db = web.database(dbn='mysql', db='weedgame_dev', user='root', pw='password')
+db = web.database(
+    dbn=settings.DATABASE_ENGINE, 
+    host=settings.DATABASE_HOST, 
+    db=settings.DATABASE_DB, 
+    user=settings.DATABASE_USER, 
+    pw=settings.DATABASE_PASSWORD)
 
 leagueDao = LeagueDao(db)
 playerDao = PlayerDao(db)
