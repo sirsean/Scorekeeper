@@ -15,7 +15,9 @@ $def with (league, game, location, players, scores, totalScores)
     <tr>
         <form method="post" action="/game/$game.id/enterScores">
         $for player in players:
-            <td><input type="text" name="playerScore_$player.id" tabindex="$loop.index" /></td>
+            <td>
+                <input type="text" id="playerScore_$player.id" name="playerScore_$player.id" tabindex="$loop.index" />
+            </td>
         <td><input type="submit" value="Enter Scores" /></td>
         </form>
     </tr>
@@ -29,4 +31,12 @@ $def with (league, game, location, players, scores, totalScores)
         <th>$totalScores[player.id]</th>
     </tr>
 </table>
+
+<script type="text/javascript">
+
+$$(document).ready(function() {
+    $$("input:text:visible:first").focus();
+});
+
+</script>
 
