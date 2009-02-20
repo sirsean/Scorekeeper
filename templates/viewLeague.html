@@ -10,6 +10,7 @@ $def with (league, locations, players, scores)
 $for scoreDict in scores:
     <tr>
     <td><strong><a href="/game/$scoreDict['game_id']/">$scoreDict['location_name']</a></strong></td>
+    <td>&mdash;</td>
     $for game in scoreDict['score']:
         <td>$game.player_name:</td><td>$game.score</td>
     </tr>

@@ -1,0 +1,19 @@
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+div.footer {
+    width: 100%;
+    text-align: center;
+    border-top: 1px dashed #CCCCCC;
+    font-size: 0.9em;
+    color: #666666;
+    padding-top: 15px;
+}
+
+div.footer p {
+    margin: 0;
+    padding: 0;
+}
+
