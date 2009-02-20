@@ -3,7 +3,62 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 }
 
+a {
+    color: #0000BB;
+}
+
+fieldset {
+    width: 400px;
+    margin-left: 100px;
+    margin-right: auto;
+    margin-bottom: 50px;
+    margin-top: 25px;
+}
+
+div.leagueHeader {
+    width: 95%;
+    padding-left: 5%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: #66CC00;
+}
+
+div.logoutBar {
+    padding-right: 1%;
+    float: right;
+}
+
+div.leagueContent {
+    float: left;
+}
+
+a.gameLink {
+    font-weight: bold;
+    color: #0000BB;
+}
+
+table.gameScoreTable th.header {
+    background-color: #66CC00;
+    padding: 6px;
+    font-size: 20pt;
+}
+
+table.gameScoreTable th.hidden {
+    background-color: none;
+}
+
+table.gameScoreTable th.footer {
+    background-color: none;
+    margin-top: 20px;
+    font-size: 20pt;
+}
+
+table.gameScoreTable td.score {
+    font-size: 18pt;
+}
+
 div.footer {
+    clear: both;
     width: 100%;
     text-align: center;
     border-top: 1px dashed #CCCCCC;

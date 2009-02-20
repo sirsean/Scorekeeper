@@ -1,7 +1,14 @@
 $def with (league, locations, players, scores)
 
-<h2>League: $league.name</h2>
+<div class="leagueHeader">
+<h2>$league.name</h2>
+</div>
+
+<div class="logoutBar">
 <p><a href="/league/logout/">Log out</a></p>
+</div>
+
+<div class="leagueContent">
 
 <h3>Games</h3>
 <p><a href="/startGame/">Start Game</a></p>
@@ -9,7 +16,7 @@ $def with (league, locations, players, scores)
 <table>
 $for scoreDict in scores:
     <tr>
-    <td><strong><a href="/game/$scoreDict['game_id']/">$scoreDict['location_name']</a></strong></td>
+    <td><a class="gameLink" href="/game/$scoreDict['game_id']/">$scoreDict['location_name']</a></td>
     <td>&mdash;</td>
     $for game in scoreDict['score']:
         <td>$game.player_name:</td><td>$game.score</td>
@@ -32,3 +39,5 @@ $for location in locations:
 $for player in players:
     <li>$player.name</li>
 </ul>
+
+</div>

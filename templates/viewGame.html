@@ -1,22 +1,26 @@
 $def with (league, game, location, players, scores, totalScores)
 
+<div class="leagueHeader">
+<h2>$league.name</h2>
+</div>
+
 <h2>Playing a Game!</h2>
 
 <p><a href="/league/">Back to league</a></p>
 
 <p><strong>Location:</strong> $location.name</p>
 
-<table>
+<table class="gameScoreTable">
     <tr>
         $for player in players:
-            <th>$player.name</th>
-        <th></th>
+            <th class="header">$player.name</th>
+        <th class="hidden"></th>
     </tr>
     <tr>
         <form method="post" action="/game/$game.id/enterScores">
         $for player in players:
-            <td>
-                <input type="text" id="playerScore_$player.id" name="playerScore_$player.id" tabindex="$loop.index" />
+            <td align="center">
+                <input type="text" id="playerScore_$player.id" name="playerScore_$player.id" tabindex="$loop.index" size="10" />
             </td>
         <td><input type="submit" value="Enter Scores" /></td>
         </form>
@@ -24,11 +28,11 @@ $def with (league, game, location, players, scores, totalScores)
         $for score in scores:
         <tr>
             $for player in players:
-            <td align="center">$score[player.id]</td>
+            <td align="center" class="score">$score[player.id]</td>
         </tr>
     <tr>
         $for player in players:
-        <th>$totalScores[player.id]</th>
+        <th class="footer">$totalScores[player.id]</th>
     </tr>
 </table>
 
