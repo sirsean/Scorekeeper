@@ -18,6 +18,12 @@ $def with (league, game, location, players, scores, totalScores)
         <th class="hidden"></th>
     </tr>
     <tr>
+        <th class="hidden"></th>
+        $for player in players:
+        <th class="footer">$totalScores[player.id]</th>
+    </tr>
+
+    <tr>
         <form method="post" action="/game/$game.id/enterScores">
         <td></td>
         $for player in players:
