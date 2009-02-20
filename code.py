@@ -9,6 +9,7 @@ Make sure to switch to the former line any time we're in production.
 
 import web
 import re
+from datetime import datetime
 from BasicDao import LeagueDao, PlayerDao, LocationDao, GameDao
 import settings
 
@@ -24,7 +25,12 @@ playerDao = PlayerDao(db)
 locationDao = LocationDao(db)
 gameDao = GameDao(db)
 
-render = web.template.render('templates', base='layout')
+# here we define template functions
+def strftime(date, format):
+    return datetime.strftime(date, format)
+template_functions = {'strftime': strftime}
+
+render = web.template.render('templates', base='layout', globals=template_functions)
 
 urls = (
     '/game/(\d+)/enterScores/?', 'EnterScores',
@@ -208,6 +214,7 @@ class ViewLeague:
         for game in games:
             scoreDict = {}
             scoreDict['game_id'] = game.id
+            scoreDict['start_time'] = game.start_time
             scoreDict['location_name'] = game.location_name
             scoreDict['score'] = list(gameDao.getScoreByGameId(game.id))
             scores.append(scoreDict)

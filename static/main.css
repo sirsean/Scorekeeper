@@ -3,6 +3,11 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 }
 
+h4 {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
 a {
     color: #0000BB;
 }
@@ -13,6 +18,11 @@ fieldset {
     margin-right: auto;
     margin-bottom: 50px;
     margin-top: 25px;
+}
+
+p.squeezed {
+    margin: 0;
+    padding: 0;
 }
 
 div.leagueHeader {
@@ -32,9 +42,28 @@ div.leagueContent {
     float: left;
 }
 
-a.gameLink {
+table.leagueScoreTable td.locationCell {
     font-weight: bold;
-    color: #0000BB;
+    font-size: 12pt;
+    padding-right: 8px;
+}
+
+table.leagueScoreTable td.dateCell {
+    font-size: 10pt;
+    font-style: italic;
+}
+
+table.leagueScoreTable td.name {
+    padding-left: 5px;
+    border-left: 1px solid #CCCCCC;
+}
+
+table.leagueScoreTable td.score {
+    font-size: 12pt;
+    font-weight: bold;
+    padding-left: 3px;
+    padding-right: 5px;
+    text-align: right;
 }
 
 table.gameScoreTable th.header {

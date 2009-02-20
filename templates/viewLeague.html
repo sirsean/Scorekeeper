@@ -13,28 +13,33 @@ $def with (league, locations, players, scores)
 <h3>Games</h3>
 <p><a href="/startGame/">Start Game</a></p>
 
-<table>
+<table class="leagueScoreTable">
 $for scoreDict in scores:
     <tr>
-    <td><a class="gameLink" href="/game/$scoreDict['game_id']/">$scoreDict['location_name']</a></td>
+    <td class="locationCell"><a href="/game/$scoreDict['game_id']/">$scoreDict['location_name']</a></td>
+    <td class="dateCell">$strftime(scoreDict['start_time'], '%m/%d/%Y')</td>
     <td>&mdash;</td>
     $for game in scoreDict['score']:
-        <td>$game.player_name:</td><td>$game.score</td>
+        <td class="name">$game.player_name:</td><td class="score">$game.score</td>
     </tr>
 </table>
 
 $if len(scores) > 5:
     <p><a href="/startGame/">Start Game</a></p>
 
-<h3>Locations</h3>
-<p><a href="/addLocation/">Add Location</a></p>
+<hr />
+
+<h4>Locations</h4>
+<p class="squeezed"><a href="/addLocation/">Add Location</a></p>
 <ul>
 $for location in locations:
     <li>$location.name</li>
 </ul>
 
-<h3>Players</h3>
-<p><a href="/addPlayer/">Add Player</a></p>
+<hr />
+
+<h4>Players</h4>
+<p class="squeezed"><a href="/addPlayer/">Add Player</a></p>
 <ul>
 $for player in players:
     <li>$player.name</li>
