@@ -12,12 +12,14 @@ $def with (league, game, location, players, scores, totalScores)
 
 <table class="gameScoreTable">
     <tr>
+        <th class="hidden"></th>
         $for player in players:
             <th class="header">$player.name</th>
         <th class="hidden"></th>
     </tr>
     <tr>
         <form method="post" action="/game/$game.id/enterScores">
+        <td></td>
         $for player in players:
             <td align="center">
                 <input type="text" id="playerScore_$player.id" name="playerScore_$player.id" tabindex="$loop.index" size="10" />
@@ -25,12 +27,16 @@ $def with (league, game, location, players, scores, totalScores)
         <td><input type="submit" value="Enter Scores" /></td>
         </form>
     </tr>
+        $ scoreIndex = len(scores)
         $for score in scores:
         <tr>
+            <td class="gameScoreIndex">$scoreIndex:</td>
             $for player in players:
             <td align="center" class="score">$score[player.id]</td>
         </tr>
+        $ scoreIndex = scoreIndex - 1
     <tr>
+        <th class="hidden"></th>
         $for player in players:
         <th class="footer">$totalScores[player.id]</th>
     </tr>

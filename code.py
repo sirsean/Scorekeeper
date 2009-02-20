@@ -176,7 +176,7 @@ class ViewGame:
         players = list(gameDao.getPlayersInGame(gameId))
 
         finalScores = []
-        scores = db.select('game_score', where='game_id=$gameId', vars={'gameId':gameId})
+        scores = db.select('game_score', where='game_id=$gameId', vars={'gameId':gameId}, order='start_time desc')
         for score in scores:
             playerScores = db.select('player_game_score', where='game_score_id=$gameScoreId', vars={'gameScoreId': score.id})
             finalScore = {}

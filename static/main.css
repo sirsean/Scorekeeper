@@ -53,6 +53,11 @@ table.gameScoreTable th.footer {
     font-size: 20pt;
 }
 
+table.gameScoreTable td.gameScoreIndex {
+    font-size: 12pt;
+    font-style: italic;
+}
+
 table.gameScoreTable td.score {
     font-size: 18pt;
 }
