@@ -35,7 +35,7 @@ class LeagueDao:
         return locations
 
     def getGamesByLeagueId(self, leagueId):
-        games = self.db.query('select g.* from game g, location l where l.league_id=$leagueId and l.id=g.location_id order by g.start_time asc', vars={'leagueId':leagueId})
+        games = self.db.query('select g.*, l.name as location_name from game g, location l where l.league_id=$leagueId and l.id=g.location_id order by g.start_time asc', vars={'leagueId':leagueId})
 
         return games
 

@@ -206,8 +206,11 @@ class ViewLeague:
 
         scores = []
         for game in games:
-            score = list(gameDao.getScoreByGameId(game.id))
-            scores.append(score)
+            scoreDict = {}
+            scoreDict['game_id'] = game.id
+            scoreDict['location_name'] = game.location_name
+            scoreDict['score'] = list(gameDao.getScoreByGameId(game.id))
+            scores.append(scoreDict)
 
         return render.viewLeague(league, locations, players, scores)
 
