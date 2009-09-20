@@ -1,8 +1,17 @@
+#!/home/sirsean/local/bin/python
+"""
+Unfortunately, I haven't yet figured out how to make this line work normally on Dreamhost. I have to run a local version of Python, so in production this line has to be:
+#!/home/sirsean/local/bin/python
+But I'd really prefer it if it could always just be:
+#!/usr/bin/env python
+Make sure to switch to the former line any time we're in production.
+"""
+
 import web
 import re
 from BasicDao import LeagueDao, PlayerDao, LocationDao, GameDao
 
-db = web.database(dbn='mysql', db='weedgame_dev', user='root', pw='password')
+db = web.database(host='mysql.vikinghammer.com', dbn='mysql', db='scorekeeper_prod', user='vikinghammer', pw='********')
 
 leagueDao = LeagueDao(db)
 playerDao = PlayerDao(db)
@@ -40,10 +49,8 @@ def transaction_interceptor(handler):
     else:
         t.commit()
     return result
-app.add_processor(transaction_interceptor)
 
 def check_logged_in():
-    print "League: %s" % session.leagueId
     if session.leagueId == 0:
         raise web.seeother('/')
     else:
@@ -125,7 +132,6 @@ class StartGame:
         input = web.input()
         locationId = input.locationId
         playerIds = []
-        print input
         for key in input:
             if re.match('playerId_(\d+)', key):
                 playerIds.append(re.match('playerId_(\d+)', key).group(1))
@@ -151,7 +157,6 @@ class EnterScores:
 
         gameScoreId = gameDao.insertGameScore(gameId)
         for (playerId, score) in scores:
-            print gameScoreId, playerId, score
             gameDao.insertPlayerGameScore(gameScoreId, playerId, score)
 
         raise web.seeother('/game/%s/' % gameId)
@@ -173,7 +178,6 @@ class ViewGame:
                 finalScore[player.id] = 0
             for playerScore in playerScores:
                 finalScore[playerScore.player_id] = playerScore.score
-            print finalScore
             finalScores.append(finalScore)
 
         totalScores = {}
