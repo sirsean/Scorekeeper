@@ -16,17 +16,17 @@ $for score in scores:
 </table>
 
 $if len(scores) > 5:
-    <p><a href="/league/$league.id/startGame/">Start Game</a></p>
+    <p><a href="/startGame/">Start Game</a></p>
 
 <h3>Locations</h3>
-<p><a href="/league/$league.id/addLocation/">Add Location</a></p>
+<p><a href="/addLocation/">Add Location</a></p>
 <ul>
 $for location in locations:
     <li>$location.name</li>
 </ul>
 
 <h3>Players</h3>
-<p><a href="/league/$league.id/addPlayer/">Add Player</a></p>
+<p><a href="/addPlayer/">Add Player</a></p>
 <ul>
 $for player in players:
     <li>$player.name</li>
