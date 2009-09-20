@@ -10,8 +10,14 @@ Make sure to switch to the former line any time we're in production.
 import web
 import re
 from BasicDao import LeagueDao, PlayerDao, LocationDao, GameDao
+import settings
 
-db = web.database(host='mysql.vikinghammer.com', dbn='mysql', db='scorekeeper_prod', user='vikinghammer', pw='********')
+db = web.database(
+    dbn=settings.DATABASE_ENGINE, 
+    host=settings.DATABASE_HOST, 
+    db=settings.DATABASE_DB, 
+    user=settings.DATABASE_USER, 
+    pw=settings.DATABASE_PASSWORD)
 
 leagueDao = LeagueDao(db)
 playerDao = PlayerDao(db)
