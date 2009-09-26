@@ -176,11 +176,27 @@ class StartGame:
     def POST(self):
         leagueId = check_logged_in()
         input = web.input()
-        locationId = input.locationId
+
+        errors = []
+
+        try:
+            locationId = input.locationId
+        except AttributeError:
+            errors.append("Location is required")
+
         playerIds = []
         for key in input:
             if re.match('playerId_(\d+)', key):
                 playerIds.append(re.match('playerId_(\d+)', key).group(1))
+
+        if len(playerIds) < 2:
+            errors.append("You must have at least 2 players")
+
+        if len(errors) > 0:
+            league = leagueDao.getLeagueById(leagueId)
+            locations = leagueDao.getLocationsByLeagueId(leagueId)
+            players = leagueDao.getPlayersByLeagueId(leagueId)
+            return render.startGame(league, locations, players, errors)
 
         gameId = gameDao.insertGame(locationId)
         for playerId in playerIds:

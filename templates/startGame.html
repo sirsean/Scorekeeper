@@ -1,8 +1,18 @@
-$def with (league, locations, players)
+$def with (league, locations, players, errors=None)
+
+<div class="leagueHeader">
+<h2>$league.name</h2>
+</div>
 
 <h3>Start Game</h3>
 
 <p><a href="/league/">Back to league</a></p>
+
+$if errors is not None and len(errors) > 0:
+    <ul class="errors">
+    $for error in errors:
+        <li>$error</li>
+    </ul>
 
 <form method="post">
 
