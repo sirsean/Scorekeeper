@@ -1,10 +1,16 @@
-$def with (league)
+$def with (league, errors=None)
 
 <div class="leagueHeader">
 <h2>Add Location to $league.name</h2>
 </div>
 
 <p><a href="/league/">Back to league</a></p>
+
+$if errors is not None and len(errors) > 0:
+    <ul class="errors">
+    $for error in errors:
+        <li>$error</li>
+    </ul>
 
 <fieldset>
 <legend>Location</legend>

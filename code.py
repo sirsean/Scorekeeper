@@ -51,6 +51,9 @@ if web.config.get('_session') is None:
 else:
     session = web.config._session
 
+"""
+I had a transaction interceptor installed that was working great, but the production environment, for some reason, throws an exception at the end of every request that triggers the rollback but otherwise everything executes correctly. So I had to remove this interceptor for it to work on Dreamhost. Damn it.
+"""
 def transaction_interceptor(handler):
     t = db.transaction()
     try:
@@ -125,6 +128,14 @@ class AddLocation:
         leagueId = check_logged_in()
         input = web.input()
 
+        errors = []
+        if not input.name or len(input.name) < 2:
+            errors.append("Location name must be at least 2 characters")
+        
+        if len(errors) > 0:
+            league = leagueDao.getLeagueById(leagueId)
+            return render.addLocation(league, errors)
+
         locationId = locationDao.insertLocation(leagueId, input.name)
 
         raise web.seeother('/league/')
@@ -139,6 +150,14 @@ class AddPlayer:
     def POST(self):
         leagueId = check_logged_in()
         input = web.input()
+
+        errors = []
+        if not input.name or len(input.name) < 2:
+            errors.append("Player name must be at least 2 characters")
+
+        if len(errors) > 0:
+            league = leagueDao.getLeagueById(leagueId)
+            return render.addPlayer(league, errors)
 
         playerId = playerDao.insertPlayer(leagueId, input.name)
 
