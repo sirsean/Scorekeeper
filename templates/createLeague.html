@@ -1,23 +1,35 @@
+$def with (errors=None)
 
 <div class="leagueHeader">
 <h2>Create League</h2>
 </div>
+
+$if errors is not None and len(errors) > 0:
+    <ul class="errors">
+    $for error in errors:
+        <li>$error</li>
+    </ul>
+
 
 <fieldset>
 <legend>League</legend>
 <form method="post">
     <table>
         <tr>
-            <td>Name:</td>
+            <td>League Name:</td>
             <td><input type="text" name="name" tabindex="1" /></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type="password" name="password" tabindex="2" /></td>
+            <td><input type="password" name="password1" tabindex="2" /></td>
+        </tr>
+        <tr>
+            <td>Repeat password:</td>
+            <td><input type="password" name="password2" tabindex="3" /></td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="Create League!" tabindex="3" />
+                <input type="submit" value="Create League!" tabindex="4" />
                 (Or <a href="/league/login/">login</a> to your existing league.)
             </td>
         </tr>

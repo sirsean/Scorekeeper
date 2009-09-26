@@ -25,6 +25,10 @@ p.squeezed {
     padding: 0;
 }
 
+ul.errors {
+    color: #CC0000;
+}
+
 div.leagueHeader {
     width: 95%;
     padding-left: 5%;

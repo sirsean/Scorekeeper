@@ -75,9 +75,18 @@ class CreateLeague:
     def POST(self):
         input = web.input()
         league = leagueDao.getLeagueByName(input.name)
+        errors = []
         if league is not None:
-            return render.createLeague()
-        id = leagueDao.insertLeague(input.name, input.password)
+            errors.append("That league already exists")
+        if input.name is None or len(input.name) < 2:
+            errors.append("The league name must be at least 2 characters")
+        if input.password1 is None or len(input.password1) < 4:
+            errors.append("The password must be at least 4 characters")
+        if input.password1 != input.password2:
+            errors.append("The passwords don't match")
+        if len(errors) > 0:
+            return render.createLeague(errors)
+        id = leagueDao.insertLeague(input.name, input.password1)
         session.leagueId = id
         raise web.seeother('/league/')
 
@@ -88,11 +97,17 @@ class LoginToLeague:
     def POST(self):
         input = web.input()
         league = leagueDao.getLeagueByName(input.name)
-        if (league.password == input.password):
+        errors = []
+        if not league:
+            errors.append("Login invalid")
+        elif (league.password == input.password):
             session.leagueId = league.id
             raise web.seeother('/league/')
         else:
-            return render.login()
+            errors.append("Login invalid")
+
+        if len(errors) > 0:
+            return render.login(errors)
 
 class LogoutFromLeague:
     def GET(self):
